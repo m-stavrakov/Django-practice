@@ -1,0 +1,27 @@
+{% extends "blog/base.html" %}
+{% block content %}
+    <h1>HTML Blog Home!</h1>
+    {% for post in posts %}
+        <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}" alt="user_picture">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a href="#" class="mr-2">
+                        {{ post.author }}</a>
+                    <small class="text-muted">
+                        {{ post.date_posted|date:'dS/F/Y' }}
+                    </small>
+                </div>
+                <h2 class="article-title">
+                    <!-- post-detail is the name from urls.py and then we tell it to bring the post with this id -->
+                    <a href="{% url 'post-detail' post.id %}">
+                        {{ post.title }}
+                    </a>
+                </h2>
+                <p class="article-content">
+                    {{ post.content }}
+                </p>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
